@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LiveSplit.PokemonRedBlue</RootNamespace>
-    <AssemblyName>LiveSplit.OcarinaOfTime</AssemblyName>
+    <AssemblyName>LiveSplit.PokemonRedBlue</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

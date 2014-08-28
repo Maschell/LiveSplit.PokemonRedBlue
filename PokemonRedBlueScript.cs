@@ -1,7 +1,7 @@
 ﻿using LiveSplit.Model;
 using LiveSplit.PokemonRedBlue;
 using System;
-using System.Diagnostics; // 1
+
 
 namespace LiveSplit.ASL
 {
@@ -213,14 +213,6 @@ namespace LiveSplit.ASL
               return (((current.Gametimer.Hours * 60) + current.Gametimer.Minutes) * 60 + current.Gametimer.Seconds + current.Gametimer.Frames / 60.0) * 1000;
         }
     
-        private static void WriteDynobj(dynamic person)
-        {
-            System.Collections.Generic.IDictionary<string, object> p = person;
-
-            foreach (var itm in p)
-            {
-                Debug.WriteLine(string.Format("{0} ist vom Typ {1} und hat als Wert {2}", itm.Key, itm.Value.GetType(), itm.Value));
-            }
-        }
+       
     }
 }
