@@ -1,6 +1,6 @@
 ﻿#define GAME_TIME
 
-//using LiveSplit.ASL;
+using LiveSplit.ASL;
 using LiveSplit.Model;
 using System;
 using System.Collections.Generic;
@@ -8,50 +8,85 @@ using System.Drawing;
 
 namespace LiveSplit.UI.Components
 {
-    class Component : LogicComponent
+    class Component : IComponent
     {
         //public ComponentSettings Settings { get; set; }
 
-        public override string ComponentName
+        public string ComponentName
         {
-            get { return "Pokemon Game Time"; }
+            get { return "Pokemon Red/Blue Auto Splitter"; }
         }
 
+        public float PaddingBottom { get { return 0; } }
+        public float PaddingTop { get { return 0; } }
+        public float PaddingLeft { get { return 0; } }
+        public float PaddingRight { get { return 0; } }
+
+        public bool Refresh { get; set; }
+
+        public IDictionary<string, Action> ContextMenuControls { get; protected set; }
+
+        public PokemonRedBlueScript Script { get; set; }
 
         public Component()
         {
+            //Settings = new ComponentSettings();
+            Script = new PokemonRedBlueScript();
         }
 
-        public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
+        public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
+        {
+            Script.Update(state);
+        }
+
+        public void DrawHorizontal(Graphics g, LiveSplitState state, float height, Region clipRegion)
         {
         }
 
-        public override System.Xml.XmlNode GetSettings(System.Xml.XmlDocument document)
+        public void DrawVertical(Graphics g, LiveSplitState state, float width, Region clipRegion)
+        {
+        }
+
+        public float VerticalHeight
+        {
+            get { return 0; }
+        }
+
+        public float MinimumWidth
+        {
+            get { return 0; }
+        }
+
+        public float HorizontalWidth
+        {
+            get { return 0; }
+        }
+
+        public float MinimumHeight
+        {
+            get { return 0; }
+        }
+
+        public System.Xml.XmlNode GetSettings(System.Xml.XmlDocument document)
         {
             return document.CreateElement("x");
         }
 
-        public override System.Windows.Forms.Control GetSettingsControl(UI.LayoutMode mode)
+        public System.Windows.Forms.Control GetSettingsControl(UI.LayoutMode mode)
         {
             return null;
         }
-      
-        
-public override void Dispose()
-{
- 	throw new NotImplementedException();
-}
 
-public override void RenameComparison(string oldName, string newName)
-{
- 	throw new NotImplementedException();
-}
+        public void SetSettings(System.Xml.XmlNode settings)
+        {
+        }
 
-public override void SetSettings(System.Xml.XmlNode settings)
-{
- 	throw new NotImplementedException();
-}
-}
+        public void RenameComparison(string oldName, string newName)
+        {
+        }
 
+        public void Dispose()
+        {
+        }
     }
 }
