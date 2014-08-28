@@ -51,6 +51,8 @@ namespace LiveSplit.ASL
             AddPointer<int>("inGame", 0x071A);
             AddPointer<EndGame>("EndGame", 0x0358); // if Map==0x76 and Endgame == 0x02
             AddPointer<Maps>("Map", 0x035E);
+            AddPointer<Byte>("Random", 0x0371);
+            AddPointer<GameTime>("Gametimer", 0x0A41);
         }
         private GameVersion GetGameVersion()
         {            
@@ -95,12 +97,15 @@ namespace LiveSplit.ASL
                     {
                         Model.Split();
                     }
-
+                   
                     var isPaused = IsPaused(lsState, OldState.Data, State.Data);
                     if (isPaused != null)
                         lsState.IsGameTimePaused = isPaused;
 
-                    
+                    var gameTime = GameTime(lsState, OldState.Data, State.Data);
+                    if (gameTime != null)
+                        lsState.SetGameTime(TimeSpan.FromMilliseconds(gameTime));
+                   
                 }
             }
             else
@@ -118,7 +123,7 @@ namespace LiveSplit.ASL
            
             current.Badge = Badges.None;
             current.EndGame = EndGame.none;
-            current.Map = Maps.None;
+            //current.Map = Maps.None;
             current.HasFirstBadge =
             current.HasSecondBadge =
             current.HasThirdBadge =
@@ -129,8 +134,8 @@ namespace LiveSplit.ASL
             current.HasEighthBadge =
             current.GotIntoHallOfFame = false;
             //Check for Timer Start
-            WriteDynobj(current);
-            if (current.inGame == 0xFF00)
+
+            if (old.Map.HasFlag(Maps.Intro) && old.Random == 0x00)
             {
                 return true;
             }
@@ -142,8 +147,7 @@ namespace LiveSplit.ASL
 
         public bool Split(LiveSplitState timer, dynamic old, dynamic current)
         {
-            //Functions
-            WriteDynobj(current);
+           
            var segment = timer.CurrentSplit.Name.ToLower();
            if (segment == "1st gym")
             {               
@@ -190,7 +194,7 @@ namespace LiveSplit.ASL
                current.GotIntoHallOfFame = (current.EndGame == EndGame.end && current.Map == Maps.HallOfFame);
               return !old.GotIntoHallOfFame && current.GotIntoHallOfFame;              
            }
-           
+         
             return false;
         }
 
@@ -204,24 +208,9 @@ namespace LiveSplit.ASL
             return true;
         }
 
-        public TimeSpan? GameTime(LiveSplitState timer, dynamic old, dynamic current)
+        public double GameTime(LiveSplitState timer, dynamic old, dynamic current)
         {
-            var delta = (current.GameFrames >= old.GameFrames)
-                ? current.GameFrames - old.GameFrames
-                : current.GameFrames;
-
-            switch ((int)current.FPSDenominator)
-            {
-                case 1: current.AccumulatedFrames60 += delta; break;
-                case 2: current.AccumulatedFrames30 += delta; break;
-                case 3: current.AccumulatedFrames20 += delta; break;
-            }
-
-            var seconds = current.AccumulatedFrames20 / 20.0f 
-                + current.AccumulatedFrames30 / 30.0f 
-                + current.AccumulatedFrames60 / 60.0f;
-
-            return TimeSpan.FromSeconds(seconds);
+              return (((current.Gametimer.Hours * 60) + current.Gametimer.Minutes) * 60 + current.Gametimer.Seconds + current.Gametimer.Frames / 60.0) * 1000;
         }
     
         private static void WriteDynobj(dynamic person)

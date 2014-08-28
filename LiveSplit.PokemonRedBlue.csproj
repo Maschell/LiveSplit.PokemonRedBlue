@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Livesplit\Components\</OutputPath>
+    <OutputPath>C:\Users\Maschell\Desktop\Speedrun\Livesplit\Components\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -54,6 +54,7 @@
     <Compile Include="Badges.cs" />
     <Compile Include="Emulator.cs" />
     <Compile Include="EmulatorBase.cs" />
+    <Compile Include="GameTime.cs" />
     <Compile Include="GameVersion.cs" />
     <Compile Include="Maps.cs" />
     <Compile Include="PokemonRedBlueScript.cs" />
