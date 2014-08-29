@@ -50,8 +50,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bill - Copy.cs" />
+    <Compile Include="Gyms.cs" />
+    <Compile Include="Bill.cs" />
+    <Compile Include="EventFlagData.cs" />
+    <Compile Include="EmulatorOffsets.cs" />
     <Compile Include="EndGame.cs" />
-    <Compile Include="Badges.cs" />
     <Compile Include="Emulator.cs" />
     <Compile Include="EmulatorBase.cs" />
     <Compile Include="GameTime.cs" />

@@ -1,9 +1,7 @@
+C:\Users\Maschell\Desktop\Speedrun\Livesplit\Components\LiveSplit.PokemonRedBlue.dll
+C:\Users\Maschell\Desktop\Speedrun\Livesplit\Components\LiveSplit.PokemonRedBlue.pdb
 G:\Programmieren\LiveSplit.PokemonRedBlue\obj\Debug\LiveSplit.PokemonRedBlue.csprojResolveAssemblyReference.cache
 G:\Programmieren\LiveSplit.PokemonRedBlue\obj\Debug\Interop.VHMediaCOMLib.dll
 G:\Programmieren\LiveSplit.PokemonRedBlue\obj\Debug\LiveSplit.PokemonRedBlue.csproj.ResolveComReference.cache
-G:\Livesplit\Components\LiveSplit.OcarinaOfTime.dll
-G:\Livesplit\Components\LiveSplit.OcarinaOfTime.pdb
-G:\Programmieren\LiveSplit.PokemonRedBlue\obj\Debug\LiveSplit.OcarinaOfTime.dll
-G:\Programmieren\LiveSplit.PokemonRedBlue\obj\Debug\LiveSplit.OcarinaOfTime.pdb
-C:\Users\Maschell\Desktop\Speedrun\Livesplit\Components\LiveSplit.OcarinaOfTime.dll
-C:\Users\Maschell\Desktop\Speedrun\Livesplit\Components\LiveSplit.OcarinaOfTime.pdb
+G:\Programmieren\LiveSplit.PokemonRedBlue\obj\Debug\LiveSplit.PokemonRedBlue.dll
+G:\Programmieren\LiveSplit.PokemonRedBlue\obj\Debug\LiveSplit.PokemonRedBlue.pdb

@@ -27,6 +27,11 @@ namespace LiveSplit.PokemonRedBlue
             {
                 return BuildVBAv24m(process);
             }
+            process = Process.GetProcessesByName("bgb").FirstOrDefault();
+            if (process != null)
+            {
+                return BuildBGB(process);
+            }
 
 
             return null;
@@ -37,6 +42,13 @@ namespace LiveSplit.PokemonRedBlue
             var offset = ~new DeepPointer<int>(process, _base);
 
             return new Emulator(process, offset);
+        }
+
+        private static Emulator BuildWithOffset(Process process, int _base,params int[] offset)
+        {
+            var newoffset = ~new DeepPointer<int>(process, _base,offset);
+
+            return new Emulator(process, newoffset);
         }
 
     
@@ -53,6 +65,14 @@ namespace LiveSplit.PokemonRedBlue
             }              
            
             return Build(process, _base);
+        }
+
+        private static Emulator BuildBGB(Process process)
+        {
+            ProcessModule module = process.MainModule;           
+            var _base = (int)EmulatorBase.BGB;          
+
+            return BuildWithOffset(process, _base,(int)EmulatorOffsets.BGB);
         }
         private static Emulator BuildVBAv24m(Process process)
         {
