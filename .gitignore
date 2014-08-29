@@ -10,6 +10,7 @@ $RECYCLE.BIN/
 
 #Debug
 obj/
+obj/Debug
 
 # Windows Installer files
 *.cab
