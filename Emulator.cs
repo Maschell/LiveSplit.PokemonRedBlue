@@ -23,6 +23,7 @@ namespace LiveSplit.PokemonRedBlue
                 return BuildVBA(process);
             }
             process = Process.GetProcessesByName("vba-v24m-svn480").FirstOrDefault();
+            
             if (process != null)
             {
                 return BuildVBAv24m(process);
@@ -37,6 +38,11 @@ namespace LiveSplit.PokemonRedBlue
             {
                 return BuildBizHawk(process);
             }
+            process = Process.GetProcessesByName("gambatte_qt_win32-r550").FirstOrDefault();
+            if (process != null)
+            {
+                return BuildGambatte(process);
+            }
 
 
             return null;
@@ -48,8 +54,14 @@ namespace LiveSplit.PokemonRedBlue
 
             return new Emulator(process, offset);
         }
-              
+         private static Emulator BuildGambatte(Process process)
+        {
 
+            var offset = ~new DeepPointer<int>(process, (int)EmulatorBase.Gambatte, (int)EmulatorOffsets.Gambatte1, (int)EmulatorOffsets.Gambatte2);
+           
+            return new Emulator(process, offset);
+        }     
+        
         private static Emulator BuildBizHawk(Process process)
         {
             var offset = ~new DeepPointer<int>(process, (int)EmulatorBase.BizHawk);
