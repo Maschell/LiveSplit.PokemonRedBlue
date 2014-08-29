@@ -32,6 +32,11 @@ namespace LiveSplit.PokemonRedBlue
             {
                 return BuildBGB(process);
             }
+            process = Process.GetProcessesByName("EmuHawk").FirstOrDefault();
+            if (process != null)
+            {
+                return BuildBizHawk(process);
+            }
 
 
             return null;
@@ -43,14 +48,13 @@ namespace LiveSplit.PokemonRedBlue
 
             return new Emulator(process, offset);
         }
+              
 
-        private static Emulator BuildWithOffset(Process process, int _base,params int[] offset)
+        private static Emulator BuildBizHawk(Process process)
         {
-            var newoffset = ~new DeepPointer<int>(process, _base,offset);
-
-            return new Emulator(process, newoffset);
+            var offset = ~new DeepPointer<int>(process, (int)EmulatorBase.BizHawk);
+            return new Emulator(process, offset + 0x390);
         }
-
     
 
         private static Emulator BuildVBA(Process process)
@@ -70,9 +74,10 @@ namespace LiveSplit.PokemonRedBlue
         private static Emulator BuildBGB(Process process)
         {
             ProcessModule module = process.MainModule;           
-            var _base = (int)EmulatorBase.BGB;          
+            var _base = (int)EmulatorBase.BGB;       
+            var newoffset = ~new DeepPointer<int>(process, _base,(int)EmulatorOffsets.BGB);
 
-            return BuildWithOffset(process, _base,(int)EmulatorOffsets.BGB);
+            return new Emulator(process, newoffset);
         }
         private static Emulator BuildVBAv24m(Process process)
         {

@@ -24,16 +24,17 @@ namespace LiveSplit.ASL
                 Emulator = Emulator.TryConnect();
                 if (Emulator != null)
                 {
-                   
+
+                    Rebuild();
                     State.RefreshValues();
-                    ReBuild();
+                    
                     OldState = State;
                     
                 }
             }
         }
 
-        private void ReBuild()
+        private void Rebuild()
         {
             State.ValueDefinitions.Clear();
             var gameVersion = GetGameVersion();
@@ -51,7 +52,7 @@ namespace LiveSplit.ASL
             AddPointer<EndGame>("EndGame", 0x0358); // if Map==0x76 and Endgame == 0x02
             AddPointer<Maps>("Map", 0x035E);
             AddPointer<Byte>("Random", 0x0371);
-            AddPointer<GameTime>("Gametimer", 0x0A41);
+            AddPointer<GameTime>("GameTimer", 0x0A41);
             AddPointer<EventFlagData>("EventFlag", 0x0600);
         }
         private GameVersion GetGameVersion()
@@ -138,6 +139,8 @@ namespace LiveSplit.ASL
             current.HasSSAnneTicket =
             current.HasHM01 = 
             current.GotIntoHallOfFame =
+            current.HasHM02 =
+            current.HasPokeFlute =
             current.HasBike = false;
             //Check for Timer Start
 
@@ -222,7 +225,17 @@ namespace LiveSplit.ASL
               current.HasBike = current.EventFlag.HasBike;
               return !old.HasBike && current.HasBike;
           }
-          else if (segment == "elite four" || segment == "champion" || segment == "hall of fame")
+          else if (segment == "hm02" || segment == "hm2" || segment == "fly")
+          {
+              current.HasHM02 = current.EventFlag.CeladonEvent.HasFlag(CeladonEvent.GotHM02);
+              return !old.HasHM02 && current.HasHM02;
+          }
+          else if (segment == "flute" || segment == "pokeflute" || segment == "poke flute")
+          {
+              current.HasPokeFlute = current.EventFlag.PokeFlute.HasFlag(PokeFluteEvent.HasPokeFlute);
+              return !old.HasPokeFlute && current.HasPokeFlute;
+          }
+          else if (segment == "elite four" || segment == "champion" || segment == "hall of fame" || segment == "end" || segment == "finish")
            {
                current.GotIntoHallOfFame = (current.EndGame == EndGame.end && current.Map == Maps.HallOfFame);
               return !old.GotIntoHallOfFame && current.GotIntoHallOfFame;              
@@ -243,7 +256,7 @@ namespace LiveSplit.ASL
 
         public TimeSpan? GameTime(LiveSplitState timer, dynamic old, dynamic current)
         {
-              return TimeSpan.FromMilliseconds((((current.Gametimer.Hours * 60) + current.Gametimer.Minutes) * 60 + current.Gametimer.Seconds + current.Gametimer.Frames / 60.0) * 1000);
+              return TimeSpan.FromMilliseconds((((current.GameTimer.Hours * 60) + current.GameTimer.Minutes) * 60 + current.GameTimer.Seconds + current.GameTimer.Frames / 60.0) * 1000);
         }
 
        

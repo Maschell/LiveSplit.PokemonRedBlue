@@ -27,4 +27,6 @@ The following splits are currently automatically being splitted:
     Bill
     HM01
     Bike
+	HM02
+	Poke Flute
     Hall of fame

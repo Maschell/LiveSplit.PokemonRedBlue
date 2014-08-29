@@ -50,7 +50,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bill - Copy.cs" />
+    <Compile Include="PokeFlute.cs" />
+    <Compile Include="Celadon.cs" />
+    <Compile Include="SSAnne.cs" />
     <Compile Include="Gyms.cs" />
     <Compile Include="Bill.cs" />
     <Compile Include="EventFlagData.cs" />
