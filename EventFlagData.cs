@@ -3,8 +3,7 @@ namespace LiveSplit.PokemonRedBlue
 {
     [StructLayout(LayoutKind.Explicit)]
     public struct EventFlagData
-    {
-      
+    {      
         [FieldOffset(0x065)]
         public byte FoughtRivalSSAnne;
         [FieldOffset(0x151)]
@@ -17,7 +16,6 @@ namespace LiveSplit.PokemonRedBlue
         public GymEvent FoughtMisty;
         [FieldOffset(0x15F)]
         public bool HasBike;
-
         [FieldOffset(0x164)]
         public byte FoughtRivalGhost; // 0x80
         [FieldOffset(0x16C)]
@@ -49,10 +47,7 @@ namespace LiveSplit.PokemonRedBlue
         [FieldOffset(0x203)]
         public SSAnneEvent SSAnne;
         [FieldOffset(0x25F)]
-        public byte FoughtMewtwo;
-
-
-        
+        public byte FoughtMewtwo;        
     }
     
     

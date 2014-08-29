@@ -7,6 +7,7 @@ The Component is currently compatible with the following emulators:
 
     VBA 1.7.2
     BGB 1.4.3
+	Gambatte r550
 
 The Component is currently compatible with the following versions of the game:
 
