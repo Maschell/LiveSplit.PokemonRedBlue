@@ -177,27 +177,27 @@ namespace LiveSplit.ASL
           }
           else if (segment == "erika")
           {
-              current.HasFoughtErika = current.EventFlag.FoughtErika.HasFlag(GymEvent.FoughtGymLeader);
+              current.HasFoughtErika = current.EventFlag.FoughtErika.HasFlag(GymEvent.FoughtGymLeader2);
               return !old.HasFoughtErika && current.HasFoughtErika;
           }
           else if (segment == "koga")
           {
-              current.HasFoughtKoga = current.EventFlag.FoughtKoga.HasFlag(GymEvent.FoughtGymLeader);
+              current.HasFoughtKoga = current.EventFlag.FoughtKoga.HasFlag(GymEvent.FoughtGymLeader2);
               return !old.HasFoughtKoga && current.HasFoughtKoga;
           }
           else if (segment == "sabrina")
           {
-              current.HasFoughtSabrina = current.EventFlag.FoughtSabrina.HasFlag(GymEvent.FoughtGymLeader);
+              current.HasFoughtSabrina = current.EventFlag.FoughtSabrina.HasFlag(GymEvent.FoughtGymLeader2);
               return !old.HasFoughtSabrina && current.HasFoughtSabrina;
           }
           else if (segment == "blaine")
           {
-              current.HasFoughtBlaine = current.EventFlag.FoughtBlaine.HasFlag(GymEvent.FoughtGymLeader);
+              current.HasFoughtBlaine = current.EventFlag.FoughtBlaine.HasFlag(GymEvent.FoughtGymLeader2);
               return !old.HasFoughtBlaine && current.HasFoughtBlaine;
           }
           else if (segment == "giovanni")
           {
-              current.HasFoughtGiovanni = current.EventFlag.FoughtGiovanni.HasFlag(GymEvent.FoughtGymLeader);
+              current.HasFoughtGiovanni = current.EventFlag.FoughtGiovanni.HasFlag(GymEvent.FoughtGymLeader2);
               return !old.HasFoughtGiovanni && current.HasFoughtGiovanni;
           }
           else if (segment == "mt moon" || segment == "mt. moon")
