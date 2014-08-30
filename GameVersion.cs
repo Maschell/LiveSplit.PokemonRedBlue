@@ -2,6 +2,8 @@
 {
     public enum GameVersion
     {
-        Unknown,        
+        Unknown,  
+        US,
+        German
     }
 }

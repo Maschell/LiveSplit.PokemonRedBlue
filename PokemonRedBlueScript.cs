@@ -40,24 +40,36 @@ namespace LiveSplit.ASL
             var gameVersion = GetGameVersion();
             switch (gameVersion)
             {
-                case GameVersion.Unknown: RebuildFoo(); break;
+                case GameVersion.Unknown: Rebuild(); break;
+                case GameVersion.US: Rebuild(); break;
+                case GameVersion.German: RebuildGer(); break;
                 default: Emulator = null; break;
             }
            
         }
-        private void RebuildFoo()
+        private void Rebuild(int offset = 0x0)
         {
             //Base ist 0xD000
-            AddPointer<int>("inGame", 0x071A);
-            AddPointer<EndGame>("EndGame", 0x0358); // if Map==0x76 and Endgame == 0x02
-            AddPointer<Maps>("Map", 0x035E);
-            AddPointer<Byte>("Random", 0x0371);
-            AddPointer<GameTime>("GameTimer", 0x0A41);
-            AddPointer<EventFlagData>("EventFlag", 0x0600);
+            AddPointer<int>("inGame", 0x071A + offset);
+            AddPointer<EndGame>("EndGame", 0x0358 + offset); // if Map==0x76 and Endgame == 0x02
+            AddPointer<Maps>("Map", 0x035E + offset);
+            AddPointer<Byte>("Random", 0x0371 + offset);
+            AddPointer<GameTime>("GameTimer", 0x0A41 + offset);
+            AddPointer<EventFlagData>("EventFlag", 0x0600 + offset);
         }
+         private void RebuildUS()
+        {
+             Rebuild();            
+        }
+         private void RebuildGer()
+         {
+             Rebuild(0x05);
+         }
+
         private GameVersion GetGameVersion()
-        {            
-            return GameVersion.Unknown;
+        {
+            var gameDataCheck = ~Emulator.CreatePointer<String>(4, 0x134);
+            return GameVersion.German;
         }
 
         private void AddPointer<T>(String name, int address)
