@@ -11,10 +11,12 @@ namespace LiveSplit.ASL
         protected Emulator Emulator { get; set; }
         public ASLState OldState { get; set; }
         public ASLState State { get; set; }
-
+   
         public PokemonRedBlueScript()
         {
             State = new ASLState();
+            
+           
         }
 
         protected void TryConnect()
@@ -41,13 +43,13 @@ namespace LiveSplit.ASL
             switch (gameVersion)
             {
                 case GameVersion.Unknown: Rebuild(); break;
-                case GameVersion.US: Rebuild(); break;
+                case GameVersion.US: RebuildUS(); break;
                 case GameVersion.German: RebuildGer(); break;
                 default: Emulator = null; break;
             }
            
         }
-        private void Rebuild(int offset = 0x0)
+        private void Rebuildbase(int offset = 0x0)
         {
             //Base ist 0xD000
             AddPointer<int>("inGame", 0x071A + offset);
@@ -56,20 +58,23 @@ namespace LiveSplit.ASL
             AddPointer<Byte>("Random", 0x0371 + offset);
             AddPointer<GameTime>("GameTimer", 0x0A41 + offset);
             AddPointer<EventFlagData>("EventFlag", 0x0600 + offset);
+            AddPointer<TeamData>("TeamData", 0x016B + offset);
+            AddPointer<Battle>("Battle", 0x057 + offset);
+            
         }
          private void RebuildUS()
         {
-             Rebuild();            
+             Rebuildbase();            
         }
          private void RebuildGer()
          {
-             Rebuild(0x05);
+             Rebuildbase(0x05);
          }
 
         private GameVersion GetGameVersion()
         {
             var gameDataCheck = ~Emulator.CreatePointer<String>(4, 0x134);
-            return GameVersion.German;
+            return GameVersion.US;
         }
 
         private void AddPointer<T>(String name, int address)
@@ -88,6 +93,7 @@ namespace LiveSplit.ASL
 
         public void Update(LiveSplitState lsState)
         {
+           
             if (Emulator != null && !Emulator.Process.HasExited)
             {
                 OldState = State.RefreshValues();
@@ -114,6 +120,7 @@ namespace LiveSplit.ASL
                     var isPaused = IsPaused(lsState, OldState.Data, State.Data);
                     if (isPaused != null)
                         lsState.IsGameTimePaused = isPaused;
+                    var encounter = GetEncounter(lsState, OldState.Data, State.Data);
 
                     var gameTime = GameTime(lsState, OldState.Data, State.Data);
                     if (gameTime != null)
@@ -136,6 +143,7 @@ namespace LiveSplit.ASL
            
            
             current.EndGame = EndGame.none;
+            current.Encounter = (int)0;
             //current.Map = Maps.None;
             current.HasFoughtBrock =
             current.HasFoughtMisty =            
@@ -168,7 +176,9 @@ namespace LiveSplit.ASL
 
         public bool Split(LiveSplitState timer, dynamic old, dynamic current)
         {
+
            
+
            var segment = timer.CurrentSplit.Name.ToLower();
 
         
@@ -261,6 +271,14 @@ namespace LiveSplit.ASL
             return false;
         }
 
+        public int GetEncounter(LiveSplitState timer, dynamic old, dynamic current)
+        {
+            if (!(old.Battle == Battle.Encounter) && (current.Battle == Battle.Encounter))
+            {
+                current.Encounter++;
+            }
+            return (int)current.Encounter;
+        }
         public bool IsPaused(LiveSplitState timer, dynamic old, dynamic current)
         {
             return true;

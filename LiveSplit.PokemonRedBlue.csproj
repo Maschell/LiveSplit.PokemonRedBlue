@@ -50,6 +50,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Battle.cs" />
+    <Compile Include="TeamData.cs" />
+    <Compile Include="PokemonStatus.cs" />
+    <Compile Include="PokemonData.cs" />
+    <Compile Include="PokemonList.cs" />
+    <Compile Include="Moves.cs" />
     <Compile Include="PokeFlute.cs" />
     <Compile Include="Celadon.cs" />
     <Compile Include="SSAnne.cs" />

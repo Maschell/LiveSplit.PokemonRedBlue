@@ -21,7 +21,7 @@ namespace LiveSplit.PokemonRedBlue
 
         public string Description
         {
-            get { return "Automatically splits for Ocarina of Time NTSC 1.0 and NTSC 1.2 on Project64 1.6, 1.7, mupen64 and BizHawk."; }
+            get { return "Automatically splits for Pokemon Red/Blue on VBA 1.7.2, BGB 1.4.3 and Gambatte r550."; }
         }
 
         public IComponent Create(LiveSplitState state)
