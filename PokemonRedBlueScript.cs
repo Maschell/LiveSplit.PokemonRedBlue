@@ -26,7 +26,6 @@ namespace LiveSplit.ASL
                 Emulator = Emulator.TryConnect();
                 if (Emulator != null)
                 {
-
                     Rebuild();
                     State.RefreshValues();
                     
@@ -139,9 +138,7 @@ namespace LiveSplit.ASL
         }
 
         public bool Start(LiveSplitState timer, dynamic old, dynamic current)
-        {
-           
-           
+        {      
             current.EndGame = EndGame.none;
             current.Encounter = (int)0;
             //current.Map = Maps.None;
@@ -153,7 +150,6 @@ namespace LiveSplit.ASL
             current.HasFoughtSabrina =
             current.HasFoughtBlaine =
             current.HasFoughtGiovanni =
-
             current.VisitedMtMoon =
             current.HasFoughtRivalNugget =
             current.HasSSAnneTicket =
@@ -162,8 +158,8 @@ namespace LiveSplit.ASL
             current.HasHM02 =
             current.HasPokeFlute =
             current.HasBike = false;
-            //Check for Timer Start
 
+            //Check for Timer Start
             if (old.Map.HasFlag(Maps.Intro) && old.Random == 0x00)
             {
                 return true;
@@ -175,12 +171,9 @@ namespace LiveSplit.ASL
        
 
         public bool Split(LiveSplitState timer, dynamic old, dynamic current)
-        {
-
-           
+        {  
 
            var segment = timer.CurrentSplit.Name.ToLower();
-
         
           if (segment == "brock")
            {                       
@@ -288,8 +281,5 @@ namespace LiveSplit.ASL
         {
               return TimeSpan.FromMilliseconds((((current.GameTimer.Hours * 60) + current.GameTimer.Minutes) * 60 + current.GameTimer.Seconds + current.GameTimer.Frames / 60.0) * 1000);
         }
-
-       
-       
     }
 }

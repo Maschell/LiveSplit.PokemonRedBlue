@@ -48,6 +48,9 @@
       <HintPath>C:\Users\Maschell\Desktop\Speedrun\Livesplit\UpdateManager.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="WinFormsColor">
+      <HintPath>C:\Users\Maschell\Desktop\Speedrun\Livesplit\WinFormsColor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Battle.cs" />

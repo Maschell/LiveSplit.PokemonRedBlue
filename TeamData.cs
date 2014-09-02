@@ -6,6 +6,7 @@ namespace LiveSplit.PokemonRedBlue
     {      
         [FieldOffset(0x0)]
         public PokemonData Pokemon1;
+
         [FieldOffset(0x2C)]
         public PokemonData Pokemon2;
         [FieldOffset(0x58)]
